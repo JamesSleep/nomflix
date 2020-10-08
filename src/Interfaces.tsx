@@ -2,7 +2,7 @@ export interface HomeProps {
   nowPlaying: null | Array<object>;
   upcoming: null | Array<object>;
   popular: null | Array<object>;
-  error: null | Array<object>;
+  error: null | string;
   loading: boolean;
 }
 
