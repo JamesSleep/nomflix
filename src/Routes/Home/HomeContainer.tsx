@@ -1,16 +1,9 @@
 import React, { useState } from "react";
 import HomePresenter from "./HomePresenter";
-
-interface HomeData {
-  nowPlaying: null | Array<object>;
-  upcoming: null | Array<object>;
-  popular: null | Array<object>;
-  error: null | Array<object>;
-  loading: boolean;
-}
+import { HomeProps } from "../../Interfaces";
 
 export default () => {
-  const [data, setData] = useState<HomeData>({
+  const [data, setData] = useState<HomeProps>({
     nowPlaying: null,
     upcoming: null,
     popular: null,
