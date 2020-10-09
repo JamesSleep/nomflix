@@ -27,12 +27,7 @@ export default () => {
       const { 
         data: { results: popular } 
       } = await moviesApi.popular();
-      setData({
-        ...data,
-        nowPlaying,
-        upcoming,
-        popular
-      });
+      setData({...data, nowPlaying, upcoming, popular});
     } catch {
       setData({
         ...data,
