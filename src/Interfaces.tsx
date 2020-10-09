@@ -17,9 +17,10 @@ export interface TVProps {
 export interface SearchProps {
   movieResults: null | Array<object>;
   tvResults: null | Array<object>;
-  searchTerm: null | string;
+  searchTerm: string;
   loading: boolean;
   error: null | string;
+  handleSubmit?: () => void;
 }
 
 export interface DetailProps {
