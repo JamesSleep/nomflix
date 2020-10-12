@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { RouteComponentProps } from "react-router-dom";
+import { textChangeRangeIsUnchanged } from "typescript";
+import { moviesApi, tvApi } from "../../api";
 import { DetailProps } from "../../Interfaces";
 import DetailPresenter from "./DetailPresenter";
 
@@ -8,10 +10,12 @@ interface RouteParams {
 }
 
 export default (props: RouteComponentProps<RouteParams>) => {
+  const { pathname } = props.location;
   const [data, setData] = useState<DetailProps>({
     result: null,
     loading: true,
-    error: null
+    error: null,
+    isMovie: pathname.includes("/movie/"),
   });
 
   useEffect(() => {
@@ -29,13 +33,26 @@ export default (props: RouteComponentProps<RouteParams>) => {
     if (isNaN(parsedId)) {
       return push("/");
     }
+    let result = null;
+    try {
+      if (data.isMovie) {
+        result = await moviesApi.movieDetail(parsedId);
+      } else {
+        result = await tvApi.showDetail(parsedId);
+      }
+    } catch {
+      setData({ ...data, error: "Can't find anything" });
+    } finally {
+      setData({ ...data, loading: false, result });
+    }
+    
   }
 
   return (
     <DetailPresenter 
-    result={data.result}
-    loading={data.loading}
-    error={data.error}
+      result={data.result}
+      loading={data.loading}
+      error={data.error}
     />
   )
 }

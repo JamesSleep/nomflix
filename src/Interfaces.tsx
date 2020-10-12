@@ -27,4 +27,5 @@ export interface DetailProps {
   result: null | object;
   loading: boolean;
   error: null | string;
+  isMovie?: null | boolean;
 }
