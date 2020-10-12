@@ -36,10 +36,11 @@ export default (props: RouteComponentProps<RouteParams>) => {
     let result = null;
     try {
       if (data.isMovie) {
-        result = await moviesApi.movieDetail(parsedId);
+        ({ data: result } = await moviesApi.movieDetail(parsedId));
       } else {
-        result = await tvApi.showDetail(parsedId);
+        ({ data: result } = await tvApi.showDetail(parsedId));
       }
+      console.log(result);
     } catch {
       setData({ ...data, error: "Can't find anything" });
     } finally {
